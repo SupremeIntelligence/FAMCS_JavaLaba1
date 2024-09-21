@@ -19,8 +19,8 @@ public class Java_Laba1 {
     public static double simpleTaylor ()
     {        
         Scanner scan = new Scanner (System.in);
-        double x = 0.0;        int k = 0;        
-        double eps = 0;        double javaResult = 0.0;        
+        double x;        int k;        
+        double eps;        double javaResult;       
         int denominator = 2;   
         
         System.out.println ("Enter the value between -1 and 1: ");        
@@ -48,7 +48,7 @@ public class Java_Laba1 {
             denominator++;               
         }
         int precision = k+1;
-        String frmtString = "The Taylor series result: %+30." + precision + "f%nThe Java.Math result: %+34."+ precision + "f";        
+        String frmtString = "Taylor series result: %+30." + precision + "f%nJava.Math result: %+34."+ precision + "f";        
         
         Formatter frmt = new Formatter();
         frmt.format(frmtString, taylorResult, javaResult);
@@ -69,6 +69,7 @@ public class Java_Laba1 {
         
         System.out.println ("Enter the value between -1 and 1: ");   //entering X
         String strNumber = reader.readLine();
+        strNumber = strNumber.replace(',', '.');        //changing , to . for correct work of BufferedReader
         double numbX = Double.parseDouble(strNumber);
         while (numbX < -1 || numbX >= 1)
         {                        
@@ -102,16 +103,15 @@ public class Java_Laba1 {
         }
         
         int precision = (int)numbK+1;
-        //int width = precision + 5;
-        String frmtString = "The Taylor series result: %+" + (precision+5) + "." + precision + "f %nThe Java.Math result: %+" + (precision+9) +"."+ precision + "f";        
+        String frmtString = "Taylor series result: %+" + (precision+5) + "." + precision + "f %nJava.Math result: %+" + (precision+9) +"."+ precision + "f";        
         
         Formatter frmt = new Formatter();
         frmt.format(frmtString, BTaylorResult, javaResult);
         System.out.println(frmt);
         
-        
-        //System.out.println(BTaylorResult);
-        //System.out.println(javaResult);
+        if (BTaylorResult.doubleValue()>javaResult)   System.out.println("Taylor result > Java.Math result.");
+        else if (BTaylorResult.doubleValue() == javaResult)   System.out.println("Taylor result == Java.Math result.");        
+        else if (BTaylorResult.doubleValue() < javaResult)    System.out.println("Taylor result < Java.Math result.");
     }
     catch (IOException error)
         {
@@ -121,10 +121,10 @@ public class Java_Laba1 {
         
     public static void main(String[] args) 
     {
-        
      Scanner scan = new Scanner (System.in); 
-     boolean choice = false;
-    System.out.println("Input FALSE if you want to use simple types and TRUE if you want to use BigInteger & BigDecimal types: ");    choice = scan.nextBoolean();
+     boolean choice;
+    System.out.println("Input FALSE if you want to use simple types and TRUE if you want to use BigInteger & BigDecimal types: ");    
+    choice = scan.nextBoolean();
         if (choice == false)
         {        
             simpleTaylor();
