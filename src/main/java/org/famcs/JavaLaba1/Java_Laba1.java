@@ -57,6 +57,9 @@ public class Java_Laba1 {
                 if (taylorResult>javaResult)   System.out.println("Taylor result > Java.Math result.");
         else if (taylorResult == javaResult)   System.out.println("Taylor result == Java.Math result.");        
         else if (taylorResult < javaResult)    System.out.println("Taylor result < Java.Math result.");
+        long roundedResult = Math.round(taylorResult);
+        System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
+        System.out.printf("Taylor result in the hexadecimal system: %4o%n", roundedResult);
                 
                 return javaResult;
     }    
@@ -84,7 +87,7 @@ public class Java_Laba1 {
         long numbK = Long.parseLong(strNumber);
         BigInteger K = BigInteger.valueOf(numbK);
         BigDecimal EPS = BigDecimal.valueOf(Math.pow(10, (-1)*K.doubleValue()));
-        reader.close();
+        //reader.close();
         
         BigDecimal Denominator = BigDecimal.valueOf(2.0);
         
@@ -109,9 +112,14 @@ public class Java_Laba1 {
         frmt.format(frmtString, BTaylorResult, javaResult);
         System.out.println(frmt);
         
-        if (BTaylorResult.doubleValue()>javaResult)   System.out.println("Taylor result > Java.Math result.");
-        else if (BTaylorResult.doubleValue() == javaResult)   System.out.println("Taylor result == Java.Math result.");        
-        else if (BTaylorResult.doubleValue() < javaResult)    System.out.println("Taylor result < Java.Math result.");
+        double doubleTResult = BTaylorResult.doubleValue();
+        if (doubleTResult>javaResult)   System.out.println("Taylor result > Java.Math result.");
+        else if (doubleTResult == javaResult)   System.out.println("Taylor result == Java.Math result.");        
+        else if (doubleTResult < javaResult)    System.out.println("Taylor result < Java.Math result.");
+
+        long roundedResult = Math.round(doubleTResult);
+        System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
+        System.out.printf("Taylor result in the hexadecimal system: %4o%n", roundedResult);
     }
     catch (IOException error)
         {
@@ -122,16 +130,38 @@ public class Java_Laba1 {
     public static void main(String[] args) 
     {
      Scanner scan = new Scanner (System.in); 
-     boolean choice;
-    System.out.println("Input FALSE if you want to use simple types and TRUE if you want to use BigInteger & BigDecimal types: ");    
-    choice = scan.nextBoolean();
-        if (choice == false)
+     int choice;
+     String menuMessage = "Input 1, 2 or 3: %n1. Simple data types %n2. BigDecimal & BigInteger data types %n3. Exit %n";
+    System.out.printf(menuMessage);  
+      menuMessage = "%n" + menuMessage;
+    choice = scan.nextInt();
+    while (choice != 3)
+    {
+            switch(choice)
+        {
+        case 1:
         {        
             simpleTaylor();
+            System.out.printf(menuMessage);
+            choice = scan.nextInt();
+            break;
         }    
-        else 
+        case 2:
         {        
-        BigTaylor();
+            BigTaylor();
+            System.out.printf(menuMessage);
+            choice = scan.nextInt();
+            break;
+        }
+        default:
+        {
+            System.out.printf(menuMessage);
+            choice = scan.nextInt();
+            break;  
         }
     }
-}
+    System.out.print("Exiting the program");      
+    }
+    }
+ }
+
