@@ -33,7 +33,23 @@ public static int scannerGetK (Scanner scan)
     return scan.nextInt();
 }
 
-public static double simpleTaylor (double x, int k)
+public static void formattedResults (int precision, double taylorResult, double javaResult)
+{
+        String frmtString = "Taylor series result: %+30." + precision + "f%nJava.Math result: %+34."+ precision + "f";        
+        
+        Formatter frmt = new Formatter();
+        frmt.format(frmtString, taylorResult, javaResult);
+        System.out.println(frmt);
+        
+                if (taylorResult>javaResult)   System.out.println("Taylor result > Java.Math result.");
+        else if (taylorResult == javaResult)   System.out.println("Taylor result == Java.Math result.");        
+        else if (taylorResult < javaResult)    System.out.println("Taylor result < Java.Math result.");
+        long roundedResult = Math.round(taylorResult);
+        System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
+        System.out.printf("Taylor result in the hexadecimal system: %4x%n", roundedResult);
+}
+
+public static void simpleTaylor (double x, int k)
     {        
         
         double eps;        
@@ -55,20 +71,7 @@ public static double simpleTaylor (double x, int k)
             denominator++;               
         }
         int precision = k+1;
-        String frmtString = "Taylor series result: %+30." + precision + "f%nJava.Math result: %+34."+ precision + "f";        
-        
-        Formatter frmt = new Formatter();
-        frmt.format(frmtString, taylorResult, javaResult);
-        System.out.println(frmt);
-        
-                if (taylorResult>javaResult)   System.out.println("Taylor result > Java.Math result.");
-        else if (taylorResult == javaResult)   System.out.println("Taylor result == Java.Math result.");        
-        else if (taylorResult < javaResult)    System.out.println("Taylor result < Java.Math result.");
-        long roundedResult = Math.round(taylorResult);
-        System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
-        System.out.printf("Taylor result in the hexadecimal system: %4x%n", roundedResult);
-                
-                return javaResult;
+        formattedResults(precision, taylorResult, javaResult);
     }    
 
     public static void BigTaylor()
@@ -94,7 +97,6 @@ public static double simpleTaylor (double x, int k)
         long numbK = Long.parseLong(strNumber);
         BigInteger K = BigInteger.valueOf(numbK);
         BigDecimal EPS = BigDecimal.valueOf(Math.pow(10, (-1)*K.doubleValue()));
-        //reader.close();
         
         BigDecimal Denominator = BigDecimal.valueOf(2.0);
         
