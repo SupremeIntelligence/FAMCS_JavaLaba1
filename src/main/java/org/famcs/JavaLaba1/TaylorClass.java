@@ -2,7 +2,6 @@ package org.famcs.JavaLaba1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -74,12 +73,10 @@ public static void simpleTaylor (double x, int k)
         formattedResults(precision, taylorResult, javaResult);
     }    
 
-    public static void BigTaylor()
-    {        
-    try {
-               
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
+    public static double readerGetX (BufferedReader reader)
+    {
+    try
+    {
         System.out.println ("Enter the value between -1 and 1: ");   //entering X
         String strNumber = reader.readLine();
         strNumber = strNumber.replace(',', '.');        //changing , to . for correct work of BufferedReader
@@ -90,11 +87,35 @@ public static void simpleTaylor (double x, int k)
             strNumber = reader.readLine();
             numbX = Double.parseDouble(strNumber);
         }
+        return numbX;
+    }
+    catch (IOException error)
+    {
+        System.out.println(error.getMessage());
+    }    
+    return 0;
+    }
+
+    public static long readerGetK(BufferedReader reader)
+    {
+    try 
+    {
+        System.out.println ("Enter the degree of the epsilon: ");   
+        String strNumber = reader.readLine();
+        long numbK = Long.parseLong(strNumber);
+        return numbK;
+    }
+    catch (IOException error)
+    {
+        System.out.println(error.getMessage());
+    }   
+    return 0;
+    }
+
+    public static void BigTaylor(double numbX, long numbK)
+    {        
         BigDecimal X = BigDecimal.valueOf(numbX);
         
-        System.out.println ("Enter the degree of the epsilon: ");    //entering K and EPS
-        strNumber = reader.readLine();
-        long numbK = Long.parseLong(strNumber);
         BigInteger K = BigInteger.valueOf(numbK);
         BigDecimal EPS = BigDecimal.valueOf(Math.pow(10, (-1)*K.doubleValue()));
         
@@ -130,11 +151,7 @@ public static void simpleTaylor (double x, int k)
         System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
         System.out.printf("Taylor result in the hexadecimal system: %4x%n", roundedResult);
     }
-    catch (IOException error)
-        {
-        System.out.println(error.getMessage());
-        }
-    }    
+    
 }
 
  

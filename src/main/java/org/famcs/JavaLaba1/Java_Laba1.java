@@ -1,5 +1,7 @@
 package org.famcs.JavaLaba1;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -29,8 +31,10 @@ public class Java_Laba1 {
             break;
         }    
         case 2:
-        {        
-            TaylorClass.BigTaylor();
+        {   
+             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+            TaylorClass.BigTaylor(TaylorClass.readerGetX(reader), TaylorClass.readerGetK(reader));
             System.out.printf(menuMessage);
             choice = scan.nextInt();
             break;
