@@ -23,7 +23,7 @@ public class Java_Laba1 {
         {
         case 1:
         {        
-            TaylorClass.simpleTaylor();
+            TaylorClass.simpleTaylor(TaylorClass.scannerGetX(scan), TaylorClass.scannerGetK(scan));
             System.out.printf(menuMessage);
             choice = scan.nextInt();
             break;

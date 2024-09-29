@@ -12,24 +12,35 @@ import java.util.Scanner;
 
 public class TaylorClass
 {
-public static double simpleTaylor ()
-    {        
-        Scanner scan = new Scanner (System.in);
-        double x;        int k;        
-        double eps;        double javaResult;       
-        int denominator = 2;   
-        
-        System.out.println ("Enter the value between -1 and 1: ");        
+
+public static double scannerGetX (Scanner scan)
+{
+    double x;
+    System.out.println ("Enter the value between -1 and 1: ");        
         x = scan.nextDouble(); 
-        
-        while (x < -1 || x >= 1)
+
+    while (x < -1 || x >= 1)
         {                        
             System.out.println ("The value should be between -1 and 1: ");
             x = scan.nextDouble();                
         }
+    return x;
+}
+
+public static int scannerGetK (Scanner scan)
+{       
+    System.out.println ("Enter the degree of the epsilon: ");
+    return scan.nextInt();
+}
+
+public static double simpleTaylor (double x, int k)
+    {        
         
-        System.out.println ("Enter the degree of the epsilon: ");
-        k = scan.nextInt();                eps = Math.pow(10, -k);
+        double eps;        
+        double javaResult;       
+        int denominator = 2;   
+        
+        eps = Math.pow(10, -k);
         double origX = x;        
         double taylorResult = -x;        
         double term = 1.0;        
