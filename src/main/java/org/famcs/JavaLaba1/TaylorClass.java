@@ -34,7 +34,7 @@ public static int scannerGetK (Scanner scan)
 
 public static void formattedResults (int precision, double taylorResult, double javaResult)
 {
-        String frmtString = "Taylor series result: %+30." + precision + "f%nJava.Math result: %+34."+ precision + "f";        
+        String frmtString = "Taylor series result: %+" + (precision+5)+ "." + precision + "f%nJava.Math result: %+"+ (precision+9) + "." + precision + "f";        
         
         Formatter frmt = new Formatter();
         frmt.format(frmtString, taylorResult, javaResult);
@@ -136,20 +136,7 @@ public static void simpleTaylor (double x, int k)
         }
         
         int precision = (int)numbK+1;
-        String frmtString = "Taylor series result: %+" + (precision+5) + "." + precision + "f %nJava.Math result: %+" + (precision+9) +"."+ precision + "f";        
-        
-        Formatter frmt = new Formatter();
-        frmt.format(frmtString, BTaylorResult, javaResult);
-        System.out.println(frmt);
-        
-        double doubleTResult = BTaylorResult.doubleValue();
-        if (doubleTResult>javaResult)   System.out.println("Taylor result > Java.Math result.");
-        else if (doubleTResult == javaResult)   System.out.println("Taylor result == Java.Math result.");        
-        else if (doubleTResult < javaResult)    System.out.println("Taylor result < Java.Math result.");
-
-        long roundedResult = Math.round(doubleTResult);
-        System.out.printf("Taylor result in the octal system: %4o%n", roundedResult);
-        System.out.printf("Taylor result in the hexadecimal system: %4x%n", roundedResult);
+        formattedResults(precision, BTaylorResult.doubleValue(), javaResult);
     }
     
 }

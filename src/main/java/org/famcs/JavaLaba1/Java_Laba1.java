@@ -32,8 +32,7 @@ public class Java_Laba1 {
         }    
         case 2:
         {   
-             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             TaylorClass.BigTaylor(TaylorClass.readerGetX(reader), TaylorClass.readerGetK(reader));
             System.out.printf(menuMessage);
             choice = scan.nextInt();
@@ -46,7 +45,7 @@ public class Java_Laba1 {
             break;  
         }
     }
-    System.out.print("Exiting the program");      
+    System.out.print("Exiting the program\n");      
     }
     }
  }
