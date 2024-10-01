@@ -48,7 +48,7 @@ public static void formattedResults (int precision, double taylorResult, double 
         System.out.printf("Taylor result in the hexadecimal system: %4x%n", roundedResult);
 }
 
-public static void simpleTaylor (double x, int k)
+public static double simpleTaylor (double x, int k)
     {        
         
         double eps;        
@@ -71,6 +71,7 @@ public static void simpleTaylor (double x, int k)
         }
         int precision = k+1;
         formattedResults(precision, taylorResult, javaResult);
+        return taylorResult;
     }    
 
     public static double readerGetX (BufferedReader reader)
@@ -112,7 +113,7 @@ public static void simpleTaylor (double x, int k)
     return 0;
     }
 
-    public static void BigTaylor(double numbX, long numbK)
+    public static double BigTaylor(double numbX, long numbK)
     {        
         BigDecimal X = BigDecimal.valueOf(numbX);
         
@@ -137,6 +138,8 @@ public static void simpleTaylor (double x, int k)
         
         int precision = (int)numbK+1;
         formattedResults(precision, BTaylorResult.doubleValue(), javaResult);
+
+        return BTaylorResult.doubleValue();
     }
     
 }
